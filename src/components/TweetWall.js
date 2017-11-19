@@ -17,13 +17,20 @@ class TweetWall extends React.Component {
   }
 
   shouldComponentUpdate(nextProps){
-    const current_tweets = this.state.tweets.map( (tweet) => tweet.text)
-    const latest_tweets = nextProps.newTweets.map( (tweet) => tweet.text)
-    return Boolean(current_tweets !== latest_tweets)
+    // const current_tweets = this.state.tweets.map( (tweet) => tweet.text)
+    // const latest_tweets = nextProps.newTweets.map( (tweet) => tweet.text)
+    // return Boolean(current_tweets !== latest_tweets)
+    return nextProps.newTweets.length > 0 ;
   }
 
   componentWillReceiveProps(nextProps){
-    this.setState({tweets: nextProps.newTweets});
+    // this.setState({tweets: nextProps.newTweets});
+    this.setState({
+      tweets:[
+        ...nextProps.newTweets,
+        ...this.state.tweets
+      ]
+    })
   }
 
   render() {
